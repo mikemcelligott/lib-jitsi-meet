@@ -89,9 +89,7 @@ let disableAGC = false;
 // Disables Highpass Filter
 let disableHPF = false;
 
-const featureDetectionAudioEl = document.createElement('audio');
-const isAudioOutputDeviceChangeAvailable
-    = typeof featureDetectionAudioEl.setSinkId !== 'undefined';
+const isAudioOutputDeviceChangeAvailable = false;
 
 let availableDevices;
 let availableDevicesPollTimer;
@@ -1501,21 +1499,7 @@ class RTCUtils extends Listenable {
      *      otherwise
      */
     setAudioOutputDevice(deviceId) {
-        if (!this.isDeviceChangeAvailable('output')) {
-            return Promise.reject(
-                new Error('Audio output device change is not supported'));
-        }
 
-        return featureDetectionAudioEl.setSinkId(deviceId)
-            .then(() => {
-                audioOutputDeviceId = deviceId;
-                audioOutputChanged = true;
-
-                logger.log(`Audio output device set to ${deviceId}`);
-
-                eventEmitter.emit(RTCEvents.AUDIO_OUTPUT_DEVICE_CHANGED,
-                    deviceId);
-            });
     }
 
     /**
