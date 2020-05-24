@@ -29,6 +29,9 @@ const ScriptUtil = {
             relativeURL,
             loadCallback,
             errorCallback) {
+
+        return;
+
         const d = document;
         const tagName = 'script';
         const script = d.createElement(tagName);
